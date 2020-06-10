@@ -2,6 +2,7 @@
 #define GAMEWINDOW_H
 
 #include <QWidget>
+#include <QPushButton>
 
 class gamewindow : public QWidget
 {
@@ -9,8 +10,11 @@ class gamewindow : public QWidget
 public:
     explicit gamewindow(QWidget *parent = nullptr);
 
-signals:
+public slots:
+    void receiveValue(int);
 
+private:
+    QPushButton* push;
 };
 
 #endif // GAMEWINDOW_H
