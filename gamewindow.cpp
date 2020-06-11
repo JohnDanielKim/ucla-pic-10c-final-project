@@ -5,12 +5,13 @@
 gamewindow::gamewindow(QWidget *parent) : QWidget(parent)
 {
     grid = new QGridLayout();
-    int row = 0;
-    int col = 0;
-    label = new QLabel(
-                QString::number(row) + " rows, " +
-                QString::number(col) + " columns");
+    row = new int;
+    col = new int;
+
+    label = new QLabel(QString::number(getVal(row)) + " rows");
     grid->addWidget(label, 1, 1);
+    label = new QLabel(QString::number(getVal(col)) + " columns");
+    grid->addWidget(label, 1, 2);
 
     push = new QPushButton("Play");
     grid->addWidget(push, 2, 1);
@@ -43,10 +44,14 @@ gamewindow::gamewindow(QWidget *parent) : QWidget(parent)
     setLayout(grid);
 }
 
-void gamewindow::getRow(int v) {
+void gamewindow::sendRow(int* v) {
     row = v;
 }
 
-void gamewindow::getCol(int v) {
+void gamewindow::sendCol(int* v) {
     col = v;
+}
+
+int gamewindow::getVal(int* v) {
+    return *v;
 }

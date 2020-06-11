@@ -24,18 +24,22 @@ mainwindow::mainwindow(QWidget *parent)
     layout->addWidget(label);
     spin = new QSpinBox;
     spin->setRange(5, 50);
-    connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
-            [=] (int value) {
-        window2->getRow(value);
+    connect(spin,
+            QOverload<int>::of(&QSpinBox::valueChanged),
+            window2,
+            [=] (int* value) {
+        window2->sendRow(value);
     });
     layout->addWidget(spin);
     label = new QLabel("Columns (max 50)");
     layout->addWidget(label);
     spin = new QSpinBox;
     spin->setRange(5, 50);
-    connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
-            [=] (int value) {
-        window2->getCol(value);
+    connect(spin,
+            QOverload<int>::of(&QSpinBox::valueChanged),
+            window2,
+            [=] (int* value) {
+        window2->sendCol(value);
     });
     layout->addWidget(spin);
     push = new QPushButton("Start when ready");
