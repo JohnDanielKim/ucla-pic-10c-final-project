@@ -6,7 +6,6 @@ mainwindow::mainwindow(QWidget *parent)
     : QMainWindow(parent)
 {
     layout = new QVBoxLayout();
-    vec = new QVector<int>(2);
 
     label = new QLabel("\"The Game of Life\" by John Conway");
     layout->addWidget(label);
@@ -27,7 +26,7 @@ mainwindow::mainwindow(QWidget *parent)
     spin->setRange(5, 50);
     connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
             [=] (int value) {
-        vec->insert(0, value);
+        window2->getRow(value);
     });
     layout->addWidget(spin);
     label = new QLabel("Columns (max 50)");
@@ -36,7 +35,7 @@ mainwindow::mainwindow(QWidget *parent)
     spin->setRange(5, 50);
     connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
             [=] (int value) {
-        vec->insert(0, value);
+        window2->getCol(value);
     });
     layout->addWidget(spin);
     push = new QPushButton("Start when ready");
@@ -44,7 +43,6 @@ mainwindow::mainwindow(QWidget *parent)
     window2 = new gamewindow();
     connect(push, &QPushButton::clicked,
             [=] () {
-        window2->receiveValue(vec);
         window2->show();
     });
 

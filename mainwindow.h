@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QVBoxLayout>
-#include <QVector>
 #include <QLabel>
 #include <QSpinBox>
 #include <QPushButton>
@@ -22,7 +21,6 @@ public slots:
 
 private:
     QVBoxLayout* layout;
-    QVector<int>* vec;
     QLabel* label;
     QSpinBox* spin;
     QPushButton* push;

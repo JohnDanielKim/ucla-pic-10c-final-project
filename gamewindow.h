@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QGridLayout>
-#include <QVector>
 #include <QLabel>
 #include <QPushButton>
 
@@ -14,11 +13,13 @@ public:
     explicit gamewindow(QWidget *parent = nullptr);
 
 public slots:
-    void receiveValue(QVector<int>* v);
+    void getRow(int v);
+    void getCol(int v);
 
 private:
-    QVector<int>* vec;
     QGridLayout* grid;
+    int row;
+    int col;
     QLabel* label;
     QPushButton* push;
 };
