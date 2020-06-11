@@ -6,6 +6,7 @@ mainwindow::mainwindow(QWidget *parent)
     : QMainWindow(parent)
 {
     layout = new QVBoxLayout();
+    vec = new QVector<int>(2);
 
     label = new QLabel("\"The Game of Life\" by John Conway");
     layout->addWidget(label);
@@ -23,30 +24,33 @@ mainwindow::mainwindow(QWidget *parent)
     label = new QLabel("Rows (max 50)");
     layout->addWidget(label);
     spin = new QSpinBox;
-    spin->setRange(1, 50);
+    spin->setRange(5, 50);
+    connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
+            [=] (int value) {
+        vec->insert(0, value);
+    });
     layout->addWidget(spin);
     label = new QLabel("Columns (max 50)");
     layout->addWidget(label);
     spin = new QSpinBox;
-    spin->setRange(1, 50);
+    spin->setRange(5, 50);
+    connect(spin, QOverload<int>::of(&QSpinBox::valueChanged),
+            [=] (int value) {
+        vec->insert(0, value);
+    });
     layout->addWidget(spin);
     push = new QPushButton("Start when ready");
     layout->addWidget(push);
     window2 = new gamewindow();
+    connect(push, &QPushButton::clicked,
+            [=] () {
+        window2->receiveValue(vec);
+        window2->show();
+    });
 
     QWidget* centralWidget = new QWidget();
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
-
-    QObject::connect(push, // object which has the signal we want to listen for
-                     &QPushButton::clicked, // a function pointer to the signal
-                     this, // object which has the slot we want to connect to the signal
-                     &mainwindow::buttonClicked); // a function pointer to the slot we want
-    QObject::connect(spin,
-                     QOverload<int>::of(&QSpinBox::valueChanged),
-                     window2,
-                     &gamewindow::receiveValue
-                     );
 }
 
 mainwindow::~mainwindow()
