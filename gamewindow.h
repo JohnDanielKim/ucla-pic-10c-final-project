@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGridLayout>
 #include <QLabel>
+#include <QSpinBox>
 #include <QPushButton>
 
 class gamewindow : public QWidget
@@ -13,14 +14,11 @@ public:
     explicit gamewindow(QWidget *parent = nullptr);
 
 public slots:
-    void sendRow(int* v);
-    void sendCol(int* v);
 
 private:
     QGridLayout* grid;
-    int row;
-    int col;
     QLabel* label;
+    QSpinBox* spin;
     QPushButton* push;
 };
 

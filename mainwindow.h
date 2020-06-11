@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QLabel>
-#include <QSpinBox>
 #include <QPushButton>
 #include "gamewindow.h"
 
@@ -22,7 +21,6 @@ public slots:
 private:
     QVBoxLayout* layout;
     QLabel* label;
-    QSpinBox* spin;
     QPushButton* push;
     gamewindow* window2;
 };
