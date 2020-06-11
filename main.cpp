@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
  *  start button
  * Game window:
  *  grid: click to make squares alive
- *  start, stop, clear buttons
+ *  start, stop, clear, return buttons
  *      start: start all game functions,
  *          stop clicks
  *      stop: pause all game functions
- *      clear: stop all game functions,
- *          return to main window
+ *      clear: clear the board (set all cells to dead)
+ *      return: return to main window
  */
