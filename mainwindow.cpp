@@ -7,6 +7,7 @@ mainwindow::mainwindow(QWidget *parent)
 {
     layout = new QVBoxLayout();
 
+
     label = new QLabel("\"The Game of Life\" by John Conway");
     layout->addWidget(label);
     label = new QLabel("Rules:");
@@ -19,6 +20,7 @@ mainwindow::mainwindow(QWidget *parent)
     layout->addWidget(label);
     label = new QLabel("4. Any dead cell with three live neighbors becomes a live cell (reproduction)");
     layout->addWidget(label);
+
 
     label = new QLabel("Rows (max 50)");
     layout->addWidget(label);
@@ -42,13 +44,18 @@ mainwindow::mainwindow(QWidget *parent)
         window2->sendCol(&value);
     });
     layout->addWidget(spin);
+
+
     push = new QPushButton("Start when ready");
     layout->addWidget(push);
+
+
     window2 = new gamewindow();
     connect(push, &QPushButton::clicked,
             [=] () {
         window2->show();
     });
+
 
     QWidget* centralWidget = new QWidget();
     centralWidget->setLayout(layout);

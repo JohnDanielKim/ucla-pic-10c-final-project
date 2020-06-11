@@ -11,25 +11,26 @@ gamewindow::gamewindow(QWidget *parent) : QWidget(parent)
     label = new QLabel(QString::number(col) + " columns");
     grid->addWidget(label, 1, 2);
 
+
     push = new QPushButton("Play");
     grid->addWidget(push, 2, 1);
     connect(push, &QPushButton::clicked,
             [=] () {
-
+        // must start cell-holding object's processes
     });
 
     push = new QPushButton("Pause");
     grid->addWidget(push, 2, 2);
     connect(push, &QPushButton::clicked,
             [=] () {
-
+        // must stop cell-holding object's processes
     });
 
     push = new QPushButton("Clear");
     grid->addWidget(push, 2, 3);
     connect(push, &QPushButton::clicked,
             [=] () {
-
+        // must set all cells to dead
     });
 
     push = new QPushButton("Return");
@@ -39,12 +40,15 @@ gamewindow::gamewindow(QWidget *parent) : QWidget(parent)
         hide();
     });
 
+
     setLayout(grid);
 }
+
 
 void gamewindow::sendRow(int* v) {
     row = *v;
 }
+
 
 void gamewindow::sendCol(int* v) {
     col = *v;
