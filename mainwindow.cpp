@@ -27,8 +27,8 @@ mainwindow::mainwindow(QWidget *parent)
     connect(spin,
             QOverload<int>::of(&QSpinBox::valueChanged),
             window2,
-            [=] (int* value) {
-        window2->sendRow(value);
+            [=] (int value) {
+        window2->sendRow(&value);
     });
     layout->addWidget(spin);
     label = new QLabel("Columns (max 50)");
@@ -38,8 +38,8 @@ mainwindow::mainwindow(QWidget *parent)
     connect(spin,
             QOverload<int>::of(&QSpinBox::valueChanged),
             window2,
-            [=] (int* value) {
-        window2->sendCol(value);
+            [=] (int value) {
+        window2->sendCol(&value);
     });
     layout->addWidget(spin);
     push = new QPushButton("Start when ready");

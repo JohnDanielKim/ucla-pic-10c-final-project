@@ -15,12 +15,11 @@ public:
 public slots:
     void sendRow(int* v);
     void sendCol(int* v);
-    int getVal(int* v);
 
 private:
     QGridLayout* grid;
-    int* row;
-    int* col;
+    int row;
+    int col;
     QLabel* label;
     QPushButton* push;
 };

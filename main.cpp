@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
  *  spinboxes for rows and cols,
  *  start button
  * Game window:
- *  grid: click to make squares alive
+ *  grid: click to make cells alive
  *  start, stop, clear, return buttons
  *      start: start all game functions,
  *          stop clicks
