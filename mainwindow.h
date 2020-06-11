@@ -8,13 +8,13 @@
 #include <QPushButton>
 #include "gamewindow.h"
 
-class MainWindow : public QMainWindow
+class mainwindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    mainwindow(QWidget *parent = nullptr);
+    ~mainwindow();
 
 public slots:
 

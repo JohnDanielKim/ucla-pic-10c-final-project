@@ -2,7 +2,7 @@
 #include <string>
 #include <QString>
 
-MainWindow::MainWindow(QWidget *parent)
+mainwindow::mainwindow(QWidget *parent)
     : QMainWindow(parent)
 {
     layout = new QVBoxLayout();
@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(push, // object which has the signal we want to listen for
                      &QPushButton::clicked, // a function pointer to the signal
                      this, // object which has the slot we want to connect to the signal
-                     &MainWindow::buttonClicked); // a function pointer to the slot we want
+                     &mainwindow::buttonClicked); // a function pointer to the slot we want
     QObject::connect(spin,
                      QOverload<int>::of(&QSpinBox::valueChanged),
                      window2,
@@ -49,6 +49,6 @@ MainWindow::MainWindow(QWidget *parent)
                      );
 }
 
-MainWindow::~MainWindow()
+mainwindow::~mainwindow()
 {
 }
