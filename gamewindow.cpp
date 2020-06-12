@@ -7,8 +7,6 @@ gamewindow::gamewindow(QWidget *parent) :
 {
     layout = new QVBoxLayout();
     widget = new gamewidget();
-    widget->getVal(5);
-    widget->clear();
 
     spin = new QSpinBox;
     spin->setRange(5, 50);
@@ -17,7 +15,6 @@ gamewindow::gamewindow(QWidget *parent) :
             QOverload<int>::of(&QSpinBox::valueChanged),
             [=] (int value) {
         widget->getVal(value);
-        widget->clear();
     });
     layout->addWidget(spin);
 
@@ -33,16 +30,11 @@ gamewindow::gamewindow(QWidget *parent) :
     push = new QPushButton("Clear");
     layout->addWidget(push);
     connect(push, &QPushButton::clicked,
-            [=] () {
-        widget->stopTimer();
-        widget->clear();
-    });
+            [=] () { widget->clear(); });
     push = new QPushButton("Return");
     layout->addWidget(push);
     connect(push, &QPushButton::clicked,
-            [=] () {
-        hide();
-    });
+            [=] () { hide(); });
 
 
     layout->addWidget(widget);

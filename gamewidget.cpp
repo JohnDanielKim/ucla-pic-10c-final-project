@@ -10,9 +10,10 @@ gamewidget::gamewidget(QWidget *parent) :
     QWidget(parent)
 {
     timer = new QTimer(this);
-    timer->setInterval(300);
+    timer->setInterval(1000);
 
     map1 = new bool[val2 * val2];
+    map2 = new bool[val2 * val2];
 
     timer->callOnTimeout(
                 [=] () {
@@ -28,14 +29,17 @@ gamewidget::~gamewidget() {
 void gamewidget::getVal(const int &v) {
     val1 = v;
     val2 = val1 + 2;
+    clear();
 }
 
 void gamewidget::clear () {
     for (int i = 0; i < val2; ++i) {
         for (int j = 0; j < val2; ++j) {
             map1[(i * val2) + j] = false;
+            map2[(i * val2) + j] = false;
         }
     }
+    stopTimer();
     repaint();
 }
 
