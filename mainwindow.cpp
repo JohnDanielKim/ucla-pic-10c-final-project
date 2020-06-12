@@ -22,7 +22,7 @@ mainwindow::mainwindow(QWidget *parent)
     layout->addWidget(label);
 
 
-    push = new QPushButton("Start when ready");
+    push = new QPushButton("GO");
     layout->addWidget(push);
 
 
