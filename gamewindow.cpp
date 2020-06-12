@@ -5,8 +5,10 @@
 gamewindow::gamewindow(QWidget *parent) :
     QWidget(parent)
 {
-    layout = new QGridLayout();
+    layout = new QVBoxLayout();
     widget = new gamewidget();
+    widget->getVal(5);
+    widget->clear();
 
     spin = new QSpinBox;
     spin->setRange(5, 50);
@@ -18,19 +20,19 @@ gamewindow::gamewindow(QWidget *parent) :
         widget->clear();
         widget->repaint();
     });
-    layout->addWidget(spin, 2, 0);
+    layout->addWidget(spin);
 
 
     push = new QPushButton("Play");
-    layout->addWidget(push, 3, 0);
+    layout->addWidget(push);
     connect(push, &QPushButton::clicked,
             [=] () { widget->startTimer(); });
     push = new QPushButton("Pause");
-    layout->addWidget(push, 4, 0);
+    layout->addWidget(push);
     connect(push, &QPushButton::clicked,
             [=] () { widget->stopTimer(); });
     push = new QPushButton("Clear");
-    layout->addWidget(push, 5, 0);
+    layout->addWidget(push);
     connect(push, &QPushButton::clicked,
             [=] () {
         widget->stopTimer();
@@ -38,14 +40,14 @@ gamewindow::gamewindow(QWidget *parent) :
         widget->repaint();
     });
     push = new QPushButton("Return");
-    layout->addWidget(push, 6, 0);
+    layout->addWidget(push);
     connect(push, &QPushButton::clicked,
             [=] () {
-        widget->hide();
+        hide();
     });
 
 
-    layout->addWidget(widget, 7, 0);
+    layout->addWidget(widget);
     setLayout(layout);
 }
 

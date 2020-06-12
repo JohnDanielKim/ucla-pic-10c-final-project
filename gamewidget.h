@@ -25,7 +25,6 @@ public slots:
     void paintEvent(QPaintEvent *);
     void color(QPainter &p);
     void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
 
     void startTimer();
     void stopTimer();

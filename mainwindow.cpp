@@ -12,11 +12,11 @@ mainwindow::mainwindow(QWidget *parent)
     layout->addWidget(label);
     label = new QLabel("Rules:");
     layout->addWidget(label);
-    label = new QLabel("1. Any live cell with fewer than two live neighbors dies (underpopulation)");
+    label = new QLabel("1. Any live cell with one or no live neighbors dies (underpopulation)");
     layout->addWidget(label);
     label = new QLabel("2. Any live cell with two or three live neighbors lives on to the next generation");
     layout->addWidget(label);
-    label = new QLabel("3. Any live cell with more than three live neighbors dies (overpopulation)");
+    label = new QLabel("3. Any live cell with over three live neighbors dies (overpopulation)");
     layout->addWidget(label);
     label = new QLabel("4. Any dead cell with three live neighbors becomes a live cell (reproduction)");
     layout->addWidget(label);

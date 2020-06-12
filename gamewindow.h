@@ -2,7 +2,7 @@
 #define GAMEWINDOW_H
 
 #include <QWidget>
-#include <QGridLayout>
+#include <QVBoxLayout>
 #include <QSpinBox>
 #include <QPushButton>
 #include "gamewidget.h"
@@ -15,7 +15,7 @@ public:
     ~gamewindow();
 
 private:
-    QGridLayout* layout;
+    QVBoxLayout* layout;
     QSpinBox* spin;
     int val;
     QPushButton* push;
