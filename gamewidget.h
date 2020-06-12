@@ -3,9 +3,6 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QLabel>
-#include <QSpinBox>
-#include <QPushButton>
 #include <QTimer>
 
 class gamewidget : public QWidget
@@ -21,6 +18,7 @@ public slots:
     void clear();
     bool cellState(int i, int j);
     void next();
+    void copy();
 
     void paintEvent(QPaintEvent *);
     void color(QPainter &p);
@@ -31,13 +29,12 @@ public slots:
 
 private:
     QVBoxLayout* layout;
-    QLabel* label;
-    QSpinBox* spin;
-    int val;
-    QPushButton* push;
+    int val1;
+    int val2;
 
     QTimer* timer;
-    bool* map;
+    bool* map1;
+    bool* map2;
 };
 
 #endif // GAMEWIDGET_H

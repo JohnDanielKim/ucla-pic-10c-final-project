@@ -10,44 +10,46 @@ gamewidget::gamewidget(QWidget *parent) :
     QWidget(parent)
 {
     timer = new QTimer(this);
-    timer->setInterval(500);
+    timer->setInterval(300);
 
-    map = new bool[val * val];
+    map1 = new bool[val2 * val2];
 
     timer->callOnTimeout(
                 [=] () {
-        next ();
-        repaint();
+        next();
     });
 }
 
 gamewidget::~gamewidget() {
-    delete [] map;
+    delete [] map1;
+    delete [] map2;
 }
 
 void gamewidget::getVal(const int &v) {
-    val = v;
+    val1 = v;
+    val2 = val1 + 2;
 }
 
 void gamewidget::clear () {
-    for (int i = 0; i <= val; ++i) {
-        for (int j = 0; j <= val; ++j) {
-            map[(i * val) + j] = false;
+    for (int i = 0; i < val2; ++i) {
+        for (int j = 0; j < val2; ++j) {
+            map1[(i * val2) + j] = false;
         }
     }
+    repaint();
 }
 
 bool gamewidget::cellState (int i, int j) {
     int neighbors = 0;
-    neighbors += map[((i - 1) * val) + (j - 1)];
-    neighbors += map[(i * val) + (j - 1)];
-    neighbors += map[((i + 1) * val) + (j - 1)];
-    neighbors += map[((i - 1) * val) + j];
-    neighbors += map[((i + 1) * val) + j];
-    neighbors += map[((i - 1) * val) + (j + 1)];
-    neighbors += map[(i * val) + (j + 1)];
-    neighbors += map[((i + 1) * val) + (j + 1)];
-    if (map[(i * val) + j] == true) {
+    neighbors += map1[((i - 1) * val2) + (j - 1)];
+    neighbors += map1[(i * val2) + (j - 1)];
+    neighbors += map1[((i + 1) * val2) + (j - 1)];
+    neighbors += map1[((i - 1) * val2) + j];
+    neighbors += map1[((i + 1) * val2) + j];
+    neighbors += map1[((i - 1) * val2) + (j + 1)];
+    neighbors += map1[(i * val2) + (j + 1)];
+    neighbors += map1[((i + 1) * val2) + (j + 1)];
+    if (map1[(i * val2) + j] == true) {
         switch (neighbors) {
             case 2:
             case 3:
@@ -68,9 +70,20 @@ bool gamewidget::cellState (int i, int j) {
 }
 
 void gamewidget::next () {
-    for (int i = 0; i <= val; ++i) {
-        for (int j = 0; j <= val; ++j) {
-            map[(i * val) + j] = cellState(i, j);
+    for (int i = 1; i < val2; ++i) {
+        for (int j = 1; j < val2; ++j) {
+            map2[(i * val2) + j] = cellState(i, j);
+        }
+    }
+    copy();
+    repaint();
+}
+
+void gamewidget::copy() {
+    for (int i = 1; i < val2; ++i) {
+        for (int j = 1; j < val2; ++j) {
+            map1[(i * val2) + j] = map2[(i * val2) + j];
+            map2[(i * val2) + j] = false;
         }
     }
 }
@@ -81,8 +94,8 @@ void gamewidget::paintEvent(QPaintEvent *) {
 }
 
 void gamewidget::color (QPainter &p) {
-    double cellWidth = (double)width() / val;
-    double cellHeight = (double)height() / val;
+    double cellWidth = (double)width() / val1;
+    double cellHeight = (double)height() / val1;
 
     p.setPen("white");
 
@@ -92,9 +105,9 @@ void gamewidget::color (QPainter &p) {
         p.drawLine(0, i, width(), i);
 
     p.drawRect(0, 0, width()-1, height()-1);
-    for (int i = 0; i <= val; ++i) {
-        for (int j = 0; j <= val; ++j) {
-            if (map[(i * val) + j]) {
+    for (int i = 0; i <= val1; ++i) {
+        for (int j = 0; j <= val1; ++j) {
+            if (map1[(i * val1) + j]) {
                 qreal left = (qreal)(cellWidth * j - cellWidth);
                 qreal top  = (qreal)(cellHeight * i - cellHeight);
                 QRectF r(left, top, (qreal)cellWidth, (qreal)cellHeight);
@@ -105,11 +118,11 @@ void gamewidget::color (QPainter &p) {
 }
 
 void gamewidget::mousePressEvent(QMouseEvent *event) {
-    double cellWidth = (double)width() / val;
-    double cellHeight = (double)height() / val;
+    double cellWidth = (double)width() / val1;
+    double cellHeight = (double)height() / val1;
     int i = qFloor(event->y() / cellHeight) + 1;
     int j = qFloor(event->x() / cellWidth) + 1;
-    map[(i * val) + j] = !map[i * val + j];
+    map1[(i * val1) + j] = !map1[i * val1 + j];
     repaint();
 }
 

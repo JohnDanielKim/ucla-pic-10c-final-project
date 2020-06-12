@@ -18,7 +18,6 @@ gamewindow::gamewindow(QWidget *parent) :
             [=] (int value) {
         widget->getVal(value);
         widget->clear();
-        widget->repaint();
     });
     layout->addWidget(spin);
 
@@ -37,7 +36,6 @@ gamewindow::gamewindow(QWidget *parent) :
             [=] () {
         widget->stopTimer();
         widget->clear();
-        widget->repaint();
     });
     push = new QPushButton("Return");
     layout->addWidget(push);

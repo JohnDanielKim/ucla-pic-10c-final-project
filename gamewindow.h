@@ -19,7 +19,6 @@ private:
     QSpinBox* spin;
     int val;
     QPushButton* push;
-
     gamewidget* widget;
 };
 
