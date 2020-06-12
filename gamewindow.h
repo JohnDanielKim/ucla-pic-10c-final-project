@@ -16,12 +16,14 @@ public:
     explicit gamewindow(QWidget *parent = nullptr);
 
 public slots:
-    void clear ();
+    void clear();
 
-    bool cellState (int i, int j);
-    void next ();
+    bool cellState(int i, int j);
+    void next();
 
-    void color ();
+    void paintEvent(QPaintEvent *);
+    void color(QPainter &p);
+    //void mouseClick();
 
 private:
     QVBoxLayout* layout;

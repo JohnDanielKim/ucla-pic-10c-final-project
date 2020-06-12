@@ -2,6 +2,7 @@
 #include <string>
 #include <QString>
 #include <QPainter>
+#include <QColor>
 
 gamewindow::gamewindow(QWidget *parent) :
     QWidget(parent)
@@ -20,6 +21,8 @@ gamewindow::gamewindow(QWidget *parent) :
             [=] (int value) {
         val = value;
         map = new bool[val * val];
+        clear();
+        repaint();
     });
     layout->addWidget(spin);
     label = new QLabel("Simulation speed (ms) [100-500]:");
@@ -48,13 +51,23 @@ gamewindow::gamewindow(QWidget *parent) :
     push = new QPushButton("Clear");
     layout->addWidget(push);
     connect(push, &QPushButton::clicked,
-            [=] () { clear (); });
+            [=] () {
+        clear();
+        repaint();
+    });
 
     push = new QPushButton("Return");
     layout->addWidget(push);
     connect(push, &QPushButton::clicked,
             [=] () {
         hide();
+    });
+
+
+    timer->callOnTimeout(
+                [=] () {
+        next ();
+        repaint();
     });
 
 
@@ -95,6 +108,31 @@ void gamewindow::next () {
     }
 }
 
-void gamewindow::color () {
+void gamewindow::paintEvent(QPaintEvent *) {
+    QPainter p(this);
+    color(p);
+}
 
+void gamewindow::color (QPainter &p) {
+    double cellWidth = (double)width()/val;
+    double cellHeight = (double)height()/val;
+
+    p.setPen("white");
+
+    for(double i = cellWidth; i <= width(); i += cellWidth)
+        p.drawLine(i, 0, i, height());
+    for(double i = cellHeight; i <= height(); i += cellHeight)
+        p.drawLine(0, i, width(), i);
+
+    p.drawRect(0, 0, width()-1, height()-1);
+    for (int i = 0; i < val; ++i) {
+        for (int j = 0; j < val; ++j) {
+            if (map[i * val + j]) {
+                qreal left = (qreal)(cellWidth * j - cellWidth);
+                qreal top  = (qreal)(cellHeight * i - cellHeight);
+                QRectF r(left, top, (qreal)cellWidth, (qreal)cellHeight);
+                p.fillRect(r, QBrush("white"));
+            }
+        }
+    }
 }
