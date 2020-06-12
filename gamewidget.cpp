@@ -11,10 +11,6 @@ gamewidget::gamewidget(QWidget *parent) :
 {
     timer = new QTimer(this);
     timer->setInterval(1000);
-
-    map1 = new bool[val2 * val2];
-    map2 = new bool[val2 * val2];
-
     timer->callOnTimeout(
                 [=] () {
         next();
@@ -29,6 +25,10 @@ gamewidget::~gamewidget() {
 void gamewidget::getVal(const int &v) {
     val1 = v;
     val2 = val1 + 2;
+    delete [] map1;
+    delete [] map2;
+    map1 = new bool[val2 * val2];
+    map2 = new bool[val2 * val2];
     clear();
 }
 
@@ -45,15 +45,15 @@ void gamewidget::clear () {
 
 bool gamewidget::cellState (int i, int j) {
     int neighbors = 0;
-    neighbors += map1[((i - 1) * val2) + (j - 1)];
-    neighbors += map1[(i * val2) + (j - 1)];
-    neighbors += map1[((i + 1) * val2) + (j - 1)];
-    neighbors += map1[((i - 1) * val2) + j];
-    neighbors += map1[((i + 1) * val2) + j];
-    neighbors += map1[((i - 1) * val2) + (j + 1)];
-    neighbors += map1[(i * val2) + (j + 1)];
-    neighbors += map1[((i + 1) * val2) + (j + 1)];
-    if (map1[(i * val2) + j] == true) {
+    neighbors += map1[((i - 1) * val1) + (j - 1)];
+    neighbors += map1[(i * val1) + (j - 1)];
+    neighbors += map1[((i + 1) * val1) + (j - 1)];
+    neighbors += map1[((i - 1) * val1) + j];
+    neighbors += map1[((i + 1) * val1) + j];
+    neighbors += map1[((i - 1) * val1) + (j + 1)];
+    neighbors += map1[(i * val1) + (j + 1)];
+    neighbors += map1[((i + 1) * val1) + (j + 1)];
+    if (map1[(i * val1) + j] == true) {
         switch (neighbors) {
             case 2:
             case 3:
@@ -74,22 +74,18 @@ bool gamewidget::cellState (int i, int j) {
 }
 
 void gamewidget::next () {
-    for (int i = 1; i < val2; ++i) {
-        for (int j = 1; j < val2; ++j) {
-            map2[(i * val2) + j] = cellState(i, j);
+    for (int i = 1; i <= val1; ++i) {
+        for (int j = 1; j <= val1; ++j) {
+            map2[(i * val1) + j] = cellState(i, j);
         }
     }
-    copy();
+    for (int i = 0; i < val1; ++i) {
+        for (int j = 0; j < val1; ++j) {
+            map1[i * val1 + j] = map2[(i * val1) + j];
+            map2[i * val1 + j] = false;
+        }
+    }
     repaint();
-}
-
-void gamewidget::copy() {
-    for (int i = 1; i < val2; ++i) {
-        for (int j = 1; j < val2; ++j) {
-            map1[(i * val2) + j] = map2[(i * val2) + j];
-            map2[(i * val2) + j] = false;
-        }
-    }
 }
 
 void gamewidget::paintEvent(QPaintEvent *) {

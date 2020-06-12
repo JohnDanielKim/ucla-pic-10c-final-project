@@ -24,8 +24,6 @@ mainwindow::mainwindow(QWidget *parent)
 
     push = new QPushButton("GO");
     layout->addWidget(push);
-
-
     window2 = new gamewindow();
     connect(push, &QPushButton::clicked,
             [=] () {

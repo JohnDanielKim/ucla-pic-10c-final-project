@@ -18,7 +18,6 @@ public slots:
     void clear();
     bool cellState(int i, int j);
     void next();
-    void copy();
 
     void paintEvent(QPaintEvent *);
     void color(QPainter &p);
