@@ -2,12 +2,10 @@
 #define GAMEWINDOW_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QLabel>
+#include <QGridLayout>
 #include <QSpinBox>
 #include <QPushButton>
-#include <QTimer>
-#include <QSlider>
+#include "gamewidget.h"
 
 class gamewindow : public QWidget
 {
@@ -15,26 +13,13 @@ class gamewindow : public QWidget
 public:
     explicit gamewindow(QWidget *parent = nullptr);
 
-public slots:
-    void clear();
-
-    bool cellState(int i, int j);
-    void next();
-
-    void paintEvent(QPaintEvent *);
-    void color(QPainter &p);
-    //void mouseClick();
-
 private:
-    QVBoxLayout* layout;
-    QLabel* label;
+    QGridLayout* layout;
     QSpinBox* spin;
     int val;
     QPushButton* push;
-    QSlider* slide;
 
-    QTimer* timer;
-    bool* map;
+    gamewidget* widget;
 };
 
 #endif // GAMEWINDOW_H
