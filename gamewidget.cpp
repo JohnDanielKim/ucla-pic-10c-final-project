@@ -13,12 +13,17 @@ gamewidget::gamewidget(QWidget *parent) :
     timer->setInterval(1000);
 
     map = new bool[val * val];
+    clear();
 
     timer->callOnTimeout(
                 [=] () {
         next ();
         repaint();
     });
+}
+
+gamewidget::~gamewidget() {
+    delete [] map;
 }
 
 void gamewidget::getVal(const int &v) {

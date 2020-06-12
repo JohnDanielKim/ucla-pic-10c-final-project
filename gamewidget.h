@@ -13,6 +13,7 @@ class gamewidget : public QWidget
     Q_OBJECT
 public:
     explicit gamewidget(QWidget *parent = nullptr);
+    ~gamewidget();
 
 public slots:
     void getVal(const int &v);

@@ -48,3 +48,5 @@ gamewindow::gamewindow(QWidget *parent) :
     layout->addWidget(widget, 7, 0);
     setLayout(layout);
 }
+
+gamewindow::~gamewindow() {}

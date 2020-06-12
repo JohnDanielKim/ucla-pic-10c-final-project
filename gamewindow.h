@@ -12,6 +12,7 @@ class gamewindow : public QWidget
     Q_OBJECT
 public:
     explicit gamewindow(QWidget *parent = nullptr);
+    ~gamewindow();
 
 private:
     QGridLayout* layout;
